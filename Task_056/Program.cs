@@ -10,40 +10,28 @@
 
 Console.Clear();
 
-Random rand = new Random();
 
 void FillMatrix (int[,] matr)
 {
+    Random rand = new Random();
     for (int i = 0; i < matr.GetLength(0); i++)
     {
         for (int j = 0; j < matr.GetLength(1); j++)
         {
             matr[i, j] = rand.Next(1, 10);
+            System.Console.Write($"{matr[i, j]}  ");
         }
+        System.Console.WriteLine();
     }
 }
-
-void PrintArray(int[,] arr)
-{
-    for (int i = 0; i < arr.GetLength(0); i++)
-    {
-       for (int j = 0; j < arr.GetLength(1); j++)
-       {
-            Console.Write($"{arr[i, j]}  ");
-       } 
-       System.Console.WriteLine();
-    }
-}
-
 
 
 int[,] matrix = new int[3, 4];
 
 FillMatrix(matrix);
-PrintArray(matrix);
+
 int [] Summes = new int [matrix.GetLength(0)];
 ShowSummLines (Summes);
-
 
 void ShowSummLines (int [] Summes)
 {
@@ -57,10 +45,11 @@ void ShowSummLines (int [] Summes)
             summLine += matrix[i, j];
             for (int n = 0; n < matrix.GetLength(0); n++)
             {
-                Summes[n] = summLine; 
+                arrSummLine[n] = summLine; 
             }
+
         }
-        System.Console.Write($"{Summes[matrix.GetLength(0) - 1]}; ");
+        System.Console.Write($"{arrSummLine [matrix.GetLength(0)-1]} ");
     }
 }
 
@@ -70,17 +59,18 @@ void ShowSummLines (int [] Summes)
 
 
 int minSummLine = Summes[0];
-// int minNum = 0;   
-for (int i = 0; i < matrix.GetLength(0) - 1; i++)
+int minNum = 0;   
+for (int n = 1; n < matrix.GetLength(0) - 1; n++)
 {
-    if (minSummLine > Summes [i])
+    if (minSummLine < Summes [n])
     {
-        minSummLine = Summes[i];
-        // minNum = i++;
+         minSummLine = Summes[n-1];
+         minNum = n++;
     }
-    else i++;
+    System.Console.WriteLine();
+    Console.WriteLine(Summes[minNum]);
 }
-Console.WriteLine($"\n{minSummLine}");
+// Console.WriteLine($"\n{minSummLine}");
 
 
 
