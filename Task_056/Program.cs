@@ -17,8 +17,8 @@ int[,] matrix = new int[row, col];
 FillMatrix(matrix);
 
 int [] AmountsLine = new int [row];
-
-Fillarray (AmountsLine);
+Console.WriteLine($"Сумма чисел каждой строки: ");
+FillArray (AmountsLine);
 
 void FillMatrix (int[,] matr)
 {
@@ -34,46 +34,33 @@ void FillMatrix (int[,] matr)
     }
 }
 
-void Fillarray (int [] arr)
+void FillArray (int [] arr)
 {
-    int [] arrSummLine = new int [row];
+    int [] arrSummLine = new int [matrix.GetLength(0)];
  
-    Console.WriteLine($"Сумма чисел каждой строки: ");
-    for (int i = 0; i < row; i++) //Начинаем со Строк, так как по ним надо посчитать сумму
+    for (int i = 0; i < matrix.GetLength(0); i++) //Начинаем со Строк, так как по ним надо посчитать сумму
     {
         int summLine = 0;
-        for (int j = 0; j < col; j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
             summLine += matrix[i, j];
-            for (int n = 0; n < row; n++)
-            {
-                arr[n] = summLine;
-            }
+            arr[i] = summLine;
         }
-        System.Console.Write($"{arr[row-1]} ");
+        System.Console.Write($"{arr[i]} ");
     }
 }
 
-
-int minSummLine = AmountsLine[0];
-int minIndex = 1;  
-for (int coul = 0; coul < row*2; coul++)
-{  
-    for (int i = 1; i < row; i++)
+int lineMinSumm = AmountsLine[0];
+int indexMinSum = 1;
+for (int i = 0; i < row; i++)
+{
+    if (AmountsLine[i] < lineMinSumm)
     {
-        if (AmountsLine[i] < minSummLine)
-        {
-            minSummLine = AmountsLine[i];
-            minIndex = i+1;
-        } 
-    }
-    // Console.Write($"\n{minSummLine}");
-    // Console.WriteLine($"\n{minIndex}");
+        lineMinSumm = AmountsLine[i];
+        indexMinSum = i+1;
+    }  
 }
-
-Console.Write($"\n{minSummLine}");
-Console.WriteLine($"\n{minIndex}");
-
+Console.WriteLine($"\nНаименьшая сумма элементов: {indexMinSum} строка");
 
 
 
