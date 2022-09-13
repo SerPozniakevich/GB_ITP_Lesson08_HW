@@ -10,6 +10,15 @@
 
 Console.Clear();
 
+int row = 4;
+int col = 4;
+int[,] matrix = new int[row, col];
+
+FillMatrix(matrix);
+
+int [] AmountsLine = new int [row];
+
+Fillarray (AmountsLine);
 
 void FillMatrix (int[,] matr)
 {
@@ -25,52 +34,45 @@ void FillMatrix (int[,] matr)
     }
 }
 
-
-int[,] matrix = new int[3, 4];
-
-FillMatrix(matrix);
-
-int [] Summes = new int [matrix.GetLength(0)];
-ShowSummLines (Summes);
-
-void ShowSummLines (int [] Summes)
+void Fillarray (int [] arr)
 {
+    int [] arrSummLine = new int [row];
+ 
     Console.WriteLine($"Сумма чисел каждой строки: ");
-    for (int i = 0; i < matrix.GetLength(0); i++) //Начинаем со Строк, так как по ним надо посчитать сред.арифм.
+    for (int i = 0; i < row; i++) //Начинаем со Строк, так как по ним надо посчитать сумму
     {
-        int [] arrSummLine = new int [matrix.GetLength(0)];
         int summLine = 0;
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < col; j++)
         {
             summLine += matrix[i, j];
-            for (int n = 0; n < matrix.GetLength(0); n++)
+            for (int n = 0; n < row; n++)
             {
-                arrSummLine[n] = summLine; 
+                arr[n] = summLine;
             }
-
         }
-        System.Console.Write($"{arrSummLine [matrix.GetLength(0)-1]} ");
+        System.Console.Write($"{arr[row-1]} ");
     }
 }
 
 
-
-
-
-
-int minSummLine = Summes[0];
-int minNum = 0;   
-for (int n = 1; n < matrix.GetLength(0) - 1; n++)
-{
-    if (minSummLine < Summes [n])
+int minSummLine = AmountsLine[0];
+int minIndex = 1;  
+for (int coul = 0; coul < row*2; coul++)
+{  
+    for (int i = 1; i < row; i++)
     {
-         minSummLine = Summes[n-1];
-         minNum = n++;
+        if (AmountsLine[i] < minSummLine)
+        {
+            minSummLine = AmountsLine[i];
+            minIndex = i+1;
+        } 
     }
-    System.Console.WriteLine();
-    Console.WriteLine(Summes[minNum]);
+    // Console.Write($"\n{minSummLine}");
+    // Console.WriteLine($"\n{minIndex}");
 }
-// Console.WriteLine($"\n{minSummLine}");
+
+Console.Write($"\n{minSummLine}");
+Console.WriteLine($"\n{minIndex}");
 
 
 
