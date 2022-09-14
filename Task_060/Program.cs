@@ -6,7 +6,7 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-Console.WriteLine("Hello, World!");
+Console.Clear();
 
 int row = 2;
 int col = 2;
@@ -25,11 +25,28 @@ void FillMatrix (int[, ,] matr)
         {
             for (int j = 0; j < matr.GetLength(2); j++)
             {
-                matr[i, k, j] = rand.Next(10, 100);
+                int number = rand.Next(10, 100);
+                if(CheckNumber(matr, number)) continue;
+                matr[i, k, j] = number;
                 
                 System.Console.Write($"{matr[i, k, j]} ({i},{k},{j})  ");
             }
             System.Console.WriteLine();
         }
     }
+}
+
+bool CheckNumber (int[, ,] arr, int num)
+{
+        for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int k = 0; k < arr.GetLength(1); k++)
+        {
+            for (int j = 0; j < arr.GetLength(2); j++)
+            {
+                if(arr[i, k, j] == num) return true;
+            }
+        }
+    }
+    return false;
 }
